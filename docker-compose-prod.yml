@@ -2,4 +2,14 @@ version: '3'
 
 services:
   jupyter:
-    image: opendatacube/cube-in-a-box:latest
+    build: .
+    environment:
+      - DB_HOSTNAME=postgres
+      - DB_USERNAME=strates
+      - DB_PASSWORD=wirtland
+      - DB_DATABASE=opendatacube
+      - AWS_NO_SIGN_REQUEST=true
+    ports:
+      - "8081:8888"
+    restart: always
+    command: jupyter notebook --allow-root --ip="0.0.0.0" --NotebookApp.token='VEnsvd902rjksd'
